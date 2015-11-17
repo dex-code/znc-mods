@@ -66,6 +66,8 @@ class xKeep(znc.Module):
     def fexec(self):
         if (self.user and seld.rcpt):
             self.sleep(0)
+            self.firstload = False
+            self.nv['firstload'] = 'False'
         else:
             self.PutModule("Are you sure that you have set username and recipient?")
 
@@ -79,18 +81,18 @@ class xKeep(znc.Module):
         self.nv['rcpt'] = rcpt
 
     def onhelp(self):
-        self.PutModule("╔══════════════╦═════════════════════╦═══════════════════════════════════════════════════════════════════╗")
-        self.PutModule("║ Command      ║ Arguments           ║ Help                                                              ║")
-        self.PutModule("╠══════════════╬═════════════════════╬═══════════════════════════════════════════════════════════════════╣")
-        self.PutModule("║ set username ║ set username <user> ║ Set your xshellz username (You should do this first)              ║")
-        self.PutModule("╠══════════════╬═════════════════════╬═══════════════════════════════════════════════════════════════════╣")
-        self.PutModule("║ set rcpt     ║ set rcpt <text>     ║ Where to send the message (xinfo or #xshellz)                     ║")
-        self.PutModule("╠══════════════╬═════════════════════╬═══════════════════════════════════════════════════════════════════╣")
-        self.PutModule("║ fexec        ║ fexec               ║ Starts the module for the first time                              ║")
-        self.PutModule("║              ║                     ║ (You should set username and recipient before using this command) ║")
-        self.PutModule("╠══════════════╬═════════════════════╬═══════════════════════════════════════════════════════════════════╣")
-        self.PutModule("║ help         ║ help                ║ Shows this help                                                   ║")
-        self.PutModule("╚══════════════╩═════════════════════╩═══════════════════════════════════════════════════════════════════╝")
+        self.PutModule("+--------------+---------------------+-------------------------------------------------------------------+")
+        self.PutModule("| Command      | Arguments           | Help                                                              |")
+        self.PutModule("+--------------+---------------------+-------------------------------------------------------------------+")
+        self.PutModule("| set username | set username <user> | Set your xshellz username (You should do this first)              |")
+        self.PutModule("+--------------+---------------------+-------------------------------------------------------------------+")
+        self.PutModule("| set rcpt     | set rcpt <text>     | Where to send the message (xinfo or #xshellz)                     |")
+        self.PutModule("+--------------+---------------------+-------------------------------------------------------------------+")
+        self.PutModule("| fexec        | fexec               | Starts the module for the first time                              |")
+        self.PutModule("|              |                     | (You should set username and recipient before using this command) |")
+        self.PutModule("+--------------+---------------------+-------------------------------------------------------------------+")
+        self.PutModule("| help         | help                | Shows this help                                                   |")
+        self.PutModule("+--------------+---------------------+-------------------------------------------------------------------+")
 
     def setuser(self, user):
         self.user = user
