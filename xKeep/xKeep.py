@@ -54,6 +54,7 @@ class xKeep(znc.Module):
             if diff >= week:
                 self.sleep(0)
             else:
+                self.PutModule("Time remaining for the next keep: {0}".format(diff))
                 dif = week - diff
                 self.sleep(dif)
         return True
@@ -62,6 +63,7 @@ class xKeep(znc.Module):
         username = self.user
         self.PutIRC('PRIVMSG {0} :!keep {1}'.format(recv, username))
         self.lastkeep = time.time()
+        self.PutModule('Keep command sent')
         self.nv['lastkeep'] = str(self.lastkeep)
 
     def fexec(self):
@@ -69,6 +71,7 @@ class xKeep(znc.Module):
             self.sleep(0)
             self.firstload = False
             self.nv['firstload'] = 'False'
+            self.PutModule('Keep command sent')
         else:
             self.PutModule("Are you sure that you have set username and recipient?")
 
