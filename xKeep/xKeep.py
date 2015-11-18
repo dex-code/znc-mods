@@ -61,7 +61,7 @@ class xKeep(znc.Module):
     def keep(self):
         rcpt = self.rcpt
         username = self.user
-        self.PutIRC('PRIVMSG {0} :!keep {1}'.format(recv, username))
+        self.PutIRC('PRIVMSG {0} :!keep {1}'.format(rcpt, username))
         self.lastkeep = time.time()
         self.PutModule('Keep command sent')
         self.nv['lastkeep'] = str(self.lastkeep)
