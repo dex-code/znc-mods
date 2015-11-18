@@ -56,6 +56,7 @@ class xKeep(znc.Module):
             else:
                 dif = week - diff
                 self.sleep(dif)
+        return True
     def keep(self):
         rcpt = self.rcpt
         username = self.user
