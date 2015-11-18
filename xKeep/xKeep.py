@@ -83,6 +83,7 @@ class xKeep(znc.Module):
     def setrcpt(self, rcpt):
         self.rcpt = rcpt
         self.nv['rcpt'] = rcpt
+        self.PutModule("Recipient Set to {0}".format(self.rcpt))
 
     def onhelp(self):
         self.PutModule("+--------------+---------------------+-------------------------------------------------------------------+")
@@ -101,6 +102,7 @@ class xKeep(znc.Module):
     def setuser(self, user):
         self.user = user
         self.nv['user'] = user
+        self.PutModule("Username set t {0}".format(self.user))
 
     def OnModCommand(self, command):
         cmdsplit = command.split()
