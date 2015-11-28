@@ -72,7 +72,7 @@ class xKeep(znc.Module):
         self.nv['lastkeep'] = str(self.lastkeep)
 
     def fexec(self):
-        if (self.user and seld.rcpt):
+        if (self.user and self.rcpt):
             self.sleep(0)
             self.firstload = False
             self.nv['firstload'] = 'False'
@@ -107,7 +107,7 @@ class xKeep(znc.Module):
     def setuser(self, user):
         self.user = user
         self.nv['user'] = user
-        self.PutModule("Username set t {0}".format(self.user))
+        self.PutModule("Username set to {0}".format(self.user))
 
     def OnModCommand(self, command):
         cmdsplit = command.split()
