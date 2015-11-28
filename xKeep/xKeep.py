@@ -23,10 +23,7 @@ import time
 class txKeep(znc.Timer):
     def RunJob(self):
         mod = self.GetModule()
-        rcpt = mod.recpt
-        username = mod.user
-        mod.PutIRC('PRIVMSG {0} :!keep {1}'.format(recv, username))
-        mod.lastkeep = time.time()
+        mod.keep()
 
 class xKeep(znc.Module):
     module_types = [znc.CModInfo.NetworkModule]
