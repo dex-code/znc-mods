@@ -20,7 +20,7 @@ import znc
 from datetime import timedelta
 import time
 
-class txkeep(znc.Timer):
+class xKeep(znc.Timer):
     def RunJob(self):
         mod = self.GetModule()
         rcpt = mod.recpt
@@ -82,7 +82,7 @@ class xKeep(znc.Module):
     def sleep(self, tme):
         time.sleep(tme)
         self.keep()
-        self.timer = txkeep(interval = self.week, cycle = 0)
+        self.timer = xKeep(interval = self.week, cycle = 0)
 
     def setrcpt(self, rcpt):
         self.rcpt = rcpt
