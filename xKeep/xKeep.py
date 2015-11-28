@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Copyright (c) 2015 noteness
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +32,7 @@ class xKeep(znc.Module):
     module_types = [znc.CModInfo.NetworkModule]
     description = "Keeps your account at xShellz"
     week = 604800
+
     def OnLoad(self, args, message):
         try:
             self.lastkeep = float(self.nv['lastkeep'])
@@ -58,10 +60,13 @@ class xKeep(znc.Module):
                 dif = week - diff
                 self.sleep(dif)
         return True
+
     def keep(self):
         rcpt = self.rcpt
         username = self.user
-        self.PutIRC('PRIVMSG {0} :!keep {1}'.format(rcpt, username))
+        msg = znc.String()
+        msg.s = 'PRIVMSG {0} :!keep {1}'.format(rcpt, username)
+        self.PutIRC(msg)
         self.lastkeep = time.time()
         self.PutModule('Keep command sent')
         self.nv['lastkeep'] = str(self.lastkeep)
