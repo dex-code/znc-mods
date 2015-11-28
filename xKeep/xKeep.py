@@ -80,8 +80,8 @@ class xKeep(znc.Module):
         else:
             self.PutModule("Are you sure that you have set username and recipient?")
 
-    def sleep(self, time):
-        time.sleep(time)
+    def sleep(self, tme):
+        time.sleep(tme)
         self.keep()
         self.timer = txkeep(interval = self.week, cycle = 0)
 
