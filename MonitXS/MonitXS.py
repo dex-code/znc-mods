@@ -93,6 +93,7 @@ class MonitXS(znc.Module):
             user = res.group(2)
             nd = self.buffer.get(nck,None)
             if nd:
+                self.buffer.pop(nck,None)
                 if user == nd['user']:
                     nu = nd['ni']
                     self.nd[user]['nick'].append(nck)
