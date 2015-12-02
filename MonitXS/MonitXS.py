@@ -128,7 +128,7 @@ class MonitXS(znc.Module):
                             self.svreport("{0} is a fuzzy match against {1} !att-user-fuzzy-match".format(z,user))
                         if got:
                             break
-                    self.populate()
+                    self.write()
             return znc.CONTIUE
 
     def OnModCommand(self, cmd):
