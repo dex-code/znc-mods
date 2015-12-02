@@ -40,14 +40,19 @@ class MonitXS(znc.Module):
         self.nd = defaultdict(defd)
         self.buf = os.path.join(self.path,'buffer.txt')
         self.reps = os.path.join(self.path,'reports.txt')
+        if not os.path.exists(self.db):
+            self.write()
         self.populate()
         return True
+
+    def write(self):
+        with open(self.db,'w') as f:
+            json.dump(self.nd,f,indent=4)
+        self.populate()
 
     def populate(self):
         with open(self.db,'r') as f:
             b = json.load(f)
-        with open(self.db,'w') as f:
-            json.dump(self.nd,f,indent=4)
         self.nd.update(b)
 
     def svreport(self, text):
@@ -117,7 +122,7 @@ class MonitXS(znc.Module):
                             self.svreport("{0}'s host ({4}) is in the host list for {1} ({2}) but user requested is {3} !att-host-match".format(nck, z, " ,".join(x['hosts']),user,host))
                         else:
                             for y in x['hosts']:
-                                if fuxx.ratio(y,host) >= 87:
+                                if fuxx.ratio(y,host) >= 95:
                                     self.svreport("{0} is a fuzzy match against {1}'s host {2}, but the user is {3} !att-host-fuzzy-match".format(host,z,y,user))
                         if fuzz.ratio(z,user) >= 50:
                             self.svreport("{0} is a fuzzy match against {1} !att-user-fuzzy-match".format(z,user))
