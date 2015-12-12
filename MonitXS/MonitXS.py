@@ -35,7 +35,7 @@ class MonitXS(znc.Module):
         self.path = self.GetSavePath()
         self.buffer = {}
         self.appr = re.compile(r'(\w+): (\w+), your account is approved and active!')
-        self.kp = re.compile(r'(\w+): Shell with the name (\w+) have 336 hours active bonus (2 weeks) from now.')
+        self.kp = re.compile(r'(\w+): Shell with the name (\w+) have 336 hours active bonus (2 weeks) from now\.')
         self.db = os.path.join(self.path,'users.json')
         self.nd = defaultdict(defd)
         self.buf = os.path.join(self.path,'buffer.txt')
@@ -58,12 +58,8 @@ class MonitXS(znc.Module):
     def svreport(self, text):
         with open(self.reps,'a') as f:
             f.write(text+'\n')
-        try:
-            if self.nv['sv'] == "True":
-                with open(self.buf,'a') as f:
-                    f.write(text+'\n')
-        except KeyError:
-            pass
+            with open(self.buf,'a') as f:
+                f.write(text+'\n')
         self.PutModule(text)
 
     def getreport(self):
@@ -77,7 +73,7 @@ class MonitXS(znc.Module):
     def OnChanMsg(self, nick, channel, message):
         if not channel.GetName() == "#xshellz":
             return znc.CONTINUE
-        msg = message.s
+        msg = str(message)
         msg = msg.split(" ")
         cmd = msg[0].lower()
         nickn = nick.GetNick()
@@ -90,9 +86,9 @@ class MonitXS(znc.Module):
         else:
             if not nickn == 'xinfo':
                 return znc.CONTINUE
-            res = self.appr.match(msg)
+            res = self.appr.search(msg)
             if not res:
-                res = self.kp.match(msg)
+                res = self.kp.search(msg)
             if not res:
                 return znc.CONTINUE
             nck = res.group(1)
